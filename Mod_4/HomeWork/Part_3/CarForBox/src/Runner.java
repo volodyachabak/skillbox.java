@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Runner {
 
-    private static final double maxBoxesInContainer = 27;
-    private static final double maxContainersOnCar = 12;
+    private static final double MAX_BOXES_IN_CONTAINER = 27;
+    private static final double MAX_CONTAINERS_ON_CAR = 12;
 
     public static void main(String[] args) {
 
@@ -12,36 +12,36 @@ public class Runner {
         System.out.println("Введите количество ящиков:");
 
         int allBoxes = scanner.nextInt();
+//        int allBoxes = 54;
+//        int allBoxes = 325;
 
         if (allBoxes > 0) {
-            int countContainers = (int) Math.ceil(allBoxes / maxBoxesInContainer);
-            int countCars = (int) Math.ceil(countContainers / maxContainersOnCar);
+            int countContainers = (int) Math.ceil(allBoxes / MAX_BOXES_IN_CONTAINER);
+            int countCars = (int) Math.ceil(countContainers / MAX_CONTAINERS_ON_CAR);
 
-            int currentBox = 1;
             int currentContainer = 1;
             int currentCar = 1;
 
             System.out.println("Грузовик: " + currentCar++);
             System.out.println("\tКонтейнер: " + currentContainer++);
 
-            while (currentBox <= allBoxes){
+            for (int currentBox = 1; currentBox <= allBoxes; currentBox++) {
                 System.out.println("\t\t" + "Ящик " + currentBox);
 
-                if(currentBox % maxBoxesInContainer == 0){
-                    System.out.println("\tКонтейнер: " + currentContainer++);
-                }
+                if (currentBox != allBoxes) {
+                    if (currentBox % (MAX_CONTAINERS_ON_CAR * MAX_BOXES_IN_CONTAINER) == 0) {
+                        System.out.println("Грузовик: " + currentCar++);
+                    }
 
-                if (currentBox % (maxContainersOnCar * maxBoxesInContainer) == 0) {
-                    System.out.println("Грузовик: " + currentCar++);
+                    if(currentBox % MAX_BOXES_IN_CONTAINER == 0){
+                        System.out.println("\tКонтейнер: " + currentContainer++);
+                    }
                 }
-                currentBox++;
             }
-
             System.err.println("Количество ящиков: " + allBoxes);
             System.err.println("Использовано " + countContainers + " контейнер(а) и " + countCars + " грозовик(а)!");
         } else {
             System.err.println("Введено неверное количество");
         }
-
     }
 }

@@ -8,7 +8,6 @@ public class Runner {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("Введите количество ящиков:");
 
         int allBoxes = scanner.nextInt();

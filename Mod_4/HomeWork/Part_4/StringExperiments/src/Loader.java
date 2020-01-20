@@ -1,16 +1,21 @@
-import org.w3c.dom.ls.LSOutput;
-
 public class Loader
 {
+    private static final int START_STRING = 0;
+    private static final String POINT = " руб";
+
     public static void main(String[] args)
     {
         String text = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей";
 
-        String masha = text.substring(text.lastIndexOf("- ") + 2, text.lastIndexOf(" руб"));
-
-        String vasyaSubString = text.substring(text.indexOf("Вася"), text.indexOf(" руб"));
-        String vasya = vasyaSubString.substring(vasyaSubString.lastIndexOf(" ")).trim();
-
-        System.out.println(Integer.valueOf(masha) + Integer.valueOf(vasya));
+        if(!text.isEmpty()){
+            while (text.contains(POINT)) {
+                int indexPoint = text.indexOf(POINT);
+                String tempStr = text.substring(START_STRING, indexPoint);
+                System.out.println(Integer.parseInt(tempStr.substring(tempStr.lastIndexOf(" ")).trim()));
+                text = text.substring(indexPoint + POINT.length());
+            }
+        } else {
+            System.err.println("Text is empty");
+        }
     }
 }

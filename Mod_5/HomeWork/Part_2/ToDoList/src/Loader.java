@@ -20,17 +20,16 @@ public class Loader {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        boolean flag = true;
 
-        while (flag){
+        exit:
+        while (true){
             System.out.println("Enter:");
             input = scanner.nextLine().trim();
-            if (parse()){
+            if (isCommand()){
                 String command = params[0];
                 switch (command){
                     case "EXIT":
-                        flag = false;
-                        break;
+                        break exit;
                     case "LIST":
                         list();
                         break;
@@ -45,12 +44,12 @@ public class Loader {
                         break;
                 }
             } else {
-                System.err.println("Bad input!");
+                System.err.println("Unknown command");
             }
         }
     }
 
-    private static boolean parse(){
+    private static boolean isCommand(){
         Matcher matcherExit = Pattern.compile(PATTERN_EXIT).matcher(Loader.input);
         Matcher matcherList = Pattern.compile(PATTERN_LIST).matcher(input);
         Matcher matcherAddWithDigits = Pattern.compile(PATTERN_ADD_WITH_DIGITS).matcher(input);

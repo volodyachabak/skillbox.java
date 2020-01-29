@@ -6,12 +6,12 @@ import java.util.regex.Pattern;
 
 public class Loader {
 
-    private static final String PATTERN_LIST = "^LIST";
-    private static final String PATTERN_EXIT = "^EXIT";
-    private static final String PATTERN_ADD = "^ADD\\s+";
-    private static final String PATTERN_ADD_WITH_DIGITS = "^ADD\\s+\\d+\\s+";
-    private static final String PATTERN_EDIT_WITH_DIGITS = "^EDIT\\s+\\d+\\s+";
-    private static final String PATTERN_DELETE_WITH_DIGITS = "^DELETE\\s+\\d+";
+    private static final Pattern PATTERN_LIST = Pattern.compile("^LIST");
+    private static final Pattern PATTERN_EXIT = Pattern.compile("^EXIT");
+    private static final Pattern PATTERN_ADD = Pattern.compile("^ADD\\s+");
+    private static final Pattern PATTERN_ADD_WITH_DIGITS = Pattern.compile("^ADD\\s+\\d+\\s+");
+    private static final Pattern PATTERN_EDIT_WITH_DIGITS = Pattern.compile("^EDIT\\s+\\d+\\s+");
+    private static final Pattern PATTERN_DELETE_WITH_DIGITS = Pattern.compile("^DELETE\\s+\\d+");
     private static String[] params;
     private static String input;
 
@@ -50,37 +50,38 @@ public class Loader {
     }
 
     private static boolean isCommand(){
-        Matcher matcherExit = Pattern.compile(PATTERN_EXIT).matcher(Loader.input);
-        Matcher matcherList = Pattern.compile(PATTERN_LIST).matcher(input);
-        Matcher matcherAddWithDigits = Pattern.compile(PATTERN_ADD_WITH_DIGITS).matcher(input);
-        Matcher matcherAdd = Pattern.compile(PATTERN_ADD).matcher(input);
-        Matcher matcherEditWithDigits = Pattern.compile(PATTERN_EDIT_WITH_DIGITS).matcher(input);
-        Matcher matcherDeleteWithDigits = Pattern.compile(PATTERN_DELETE_WITH_DIGITS).matcher(input);
+        Matcher matcherExit = PATTERN_EXIT.matcher(input);
+        Matcher matcherList = PATTERN_LIST.matcher(input);
+        Matcher matcherAddWithDigits = PATTERN_ADD_WITH_DIGITS.matcher(input);
+        Matcher matcherAdd = PATTERN_ADD.matcher(input);
+        Matcher matcherEditWithDigits = PATTERN_EDIT_WITH_DIGITS.matcher(input);
+        Matcher matcherDeleteWithDigits = PATTERN_DELETE_WITH_DIGITS.matcher(input);
         params = null;
 
         if (matcherExit.find()) {
             params = matcherExit.group().split("\\s+");
-            input = input.replaceAll(PATTERN_EXIT, "");
+            input = matcherExit.replaceAll("");
         }
         if (matcherList.find()) {
             params = matcherList.group().split("\\s+");
-            input = input.replaceAll(PATTERN_LIST, "");
+            input = matcherList.replaceAll("");
+
         }
-        if (matcherAdd.find() && !Pattern.compile(PATTERN_ADD_WITH_DIGITS).matcher(input).find()) {
+        if (matcherAdd.find() && !PATTERN_ADD_WITH_DIGITS.matcher(input).find()) {
             params = matcherAdd.group().split("\\s+");
-            input = input.replaceAll(PATTERN_ADD, "");
+            input = matcherAdd.replaceAll("");
         }
         if (matcherAddWithDigits.find()) {
             params = matcherAddWithDigits.group().split("\\s+");
-            input = input.replaceAll(PATTERN_ADD_WITH_DIGITS, "");
+            input = matcherAddWithDigits.replaceAll("");
         }
         if (matcherEditWithDigits.find()) {
             params = matcherEditWithDigits.group().split("\\s+");
-            input = input.replaceAll(PATTERN_EDIT_WITH_DIGITS, "");
+            input = matcherEditWithDigits.replaceAll( "");
         }
         if (matcherDeleteWithDigits.find()) {
             params = matcherDeleteWithDigits.group().split("\\s+");
-            input = input.replaceAll(PATTERN_DELETE_WITH_DIGITS, "");
+            input = matcherDeleteWithDigits.replaceAll( "");
         }
         return params != null;
     }

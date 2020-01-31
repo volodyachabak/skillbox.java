@@ -3,7 +3,7 @@ import java.util.*;
 public class Loader {
 
     private static List<String> numbersArrayList;
-    private  static Set<String> numbersHashSet;
+    private static Set<String> numbersHashSet;
     private static Set<String> numbersTreeSet;
     private static List<String> numbersSortedArrayList;
 

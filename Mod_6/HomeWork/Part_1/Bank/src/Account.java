@@ -7,7 +7,11 @@ public abstract class Account {
     }
 
     public void withdraw(double value){
-        amount -= value;
+        if(value > amount){
+            System.err.println("Not enough money");
+        } else {
+            amount -= value;
+        }
     }
 
     public double getAmount(){

@@ -25,7 +25,7 @@ public class Loader {
         for(int i = 0; i < countManagers; i++) {
             Manager manager = new Manager(4000 + Math.random() * 4000);
             manager.setMadeMoney(1000 + Math.random() * 25000);
-            manager.setBonus(0.05);
+            manager.setBonus(managerBonus);
             managers.add(manager);
         }
 
@@ -33,7 +33,7 @@ public class Loader {
 
         for(var i = 0; i < countTopManagers; i++) {
             TopManager topManager = new TopManager(6000 + Math.random() * 6000);
-            topManager.setBonus(1.5);
+            topManager.setBonus(topManagerBonus);
             topManager.setCompany(company);
             company.hire(topManager);
         }
@@ -64,6 +64,6 @@ public class Loader {
             System.out.println(employee.getMonthSalary());
         }
 
-        System.out.println(company.getIncome());
+        System.out.println("Company income " + company.getIncome());
     }
 }

@@ -1,20 +1,28 @@
 package model;
 
 public class Manager implements Employee {
-    private static double salary;
-    private static double bonus;
+    private double salary;
+    private double bonus;
     private double madeMoney;
 
-    public Manager(double madeMoney) {
+    public Manager(double salary) {
+        this.salary = salary;
+    }
+
+    public void setMadeMoney(double madeMoney) {
         this.madeMoney = madeMoney;
     }
 
-    public static void setBonus(double bonus) {
-        Manager.bonus = bonus;
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
     }
 
-    public static void setSalary(double salary) {
-        Manager.salary = salary;
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public double getMadeMoney() {
+        return madeMoney;
     }
 
     public double getMonthSalary() {

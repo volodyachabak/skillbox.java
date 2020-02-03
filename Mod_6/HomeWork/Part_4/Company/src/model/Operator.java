@@ -1,10 +1,14 @@
 package model;
 
 public class Operator implements Employee {
-    private static double salary;
+    private double salary;
 
-    public static void setSalary(double salary) {
-        Operator.salary = salary;
+    public Operator(double salary) {
+        this.salary = salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     public double getMonthSalary() {

@@ -7,6 +7,9 @@ public class Company {
     private double income;
     private List<Employee> staff = new ArrayList<>();
 
+    public Company() {
+    }
+
     public Company(double income) {
         this.income = income;
     }
@@ -50,6 +53,14 @@ public class Company {
     }
 
     public double getIncome() {
+        double summ = 0;
+
+        for (Employee employee : staff){
+            if (employee instanceof Manager){
+                summ += ((Manager) employee).getMadeMoney();
+            }
+        }
+        income = summ;
         return income;
     }
 }

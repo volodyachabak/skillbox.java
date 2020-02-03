@@ -1,23 +1,29 @@
 package model;
 
 public class TopManager implements Employee {
-    private static double salary;
-    private static double bonus;
-    private static double incomeCompany;
+    private double salary;
+    private double bonus;
+    private int border = 10_000_000;
+    private Company company;
 
-    public static void setBonus(double bonus) {
-        TopManager.bonus = bonus;
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
     }
 
-    public static void setIncomeCompany(double incomeCompany) {
-        TopManager.incomeCompany = incomeCompany;
+    public TopManager(double salary) {
+        this.salary = salary;
     }
 
-    public static void setSalary(double salary) {
-        TopManager.salary = salary;
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     public double getMonthSalary() {
-        return (incomeCompany > 10_000_000) ? salary + salary * bonus : salary;
+
+        return (company.getIncome() > border) ? salary + salary * bonus : salary;
     }
 }

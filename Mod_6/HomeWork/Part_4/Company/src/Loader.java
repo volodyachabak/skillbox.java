@@ -7,13 +7,9 @@ import model.*;
 public class Loader {
 
     public static void main(String[] args) {
-        Company company = new Company(10_000_000);
-        Operator.setSalary(4000);
-        Manager.setBonus(0.05);
-        Manager.setSalary(8000);
-        TopManager.setBonus(1.5);
-        TopManager.setSalary(10000);
-        TopManager.setIncomeCompany(company.getIncome());
+        Company company = new Company();
+        double topManagerBonus = 1.5;
+        double managerBonus = 0.05;
         int countOperators = 180;
         int countManagers = 80;
         int countTopManagers = 10;
@@ -21,19 +17,25 @@ public class Loader {
         List<Employee> managers = new ArrayList<>();
 
         for(int i = 0; i < countOperators; i++) {
-            operators.add(new Operator());
+            operators.add(new Operator(2000 + Math.random() * 3000));
         }
 
         company.hireAll(operators);
 
         for(int i = 0; i < countManagers; i++) {
-            managers.add(new Manager(1000 + Math.random() * 25000));
+            Manager manager = new Manager(4000 + Math.random() * 4000);
+            manager.setMadeMoney(1000 + Math.random() * 25000);
+            manager.setBonus(0.05);
+            managers.add(manager);
         }
 
         company.hireAll(managers);
 
         for(var i = 0; i < countTopManagers; i++) {
-            company.hire(new TopManager());
+            TopManager topManager = new TopManager(6000 + Math.random() * 6000);
+            topManager.setBonus(1.5);
+            topManager.setCompany(company);
+            company.hire(topManager);
         }
 
         System.out.println("Top salary");
@@ -61,5 +63,7 @@ public class Loader {
         for (Employee employee : company.getLowestSalaryStaff(30)){
             System.out.println(employee.getMonthSalary());
         }
+
+        System.out.println(company.getIncome());
     }
 }

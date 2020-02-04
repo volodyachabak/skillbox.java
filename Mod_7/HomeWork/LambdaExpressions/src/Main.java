@@ -13,7 +13,8 @@ public class Main
     public static void main(String[] args)
     {
         ArrayList<Employee> staff = loadStaffFromFile();
-        staff.sort(Comparator.comparing(Employee::getName).thenComparing(Employee::getSalary));
+        staff.sort(((e1, e2) -> e1.getSalary().compareTo(e2.getSalary())));
+        staff.sort((e1, e2) -> e1.getName().compareTo(e2.getName()));
         staff.forEach(System.out::println);
     }
 

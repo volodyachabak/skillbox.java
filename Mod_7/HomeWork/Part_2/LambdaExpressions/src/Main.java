@@ -3,6 +3,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -13,13 +14,9 @@ public class Main
 
     public static void main(String[] args)
     {
-
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(2017,1,1);
         ArrayList<Employee> staff = loadStaffFromFile();
-        staff.sort(Comparator.comparing(Employee::getName).thenComparing(Employee::getSalary));
-//        staff.forEach(System.out::println);
-        staff.stream().filter(e -> e.getWorkStart().after(calendar.getTime()))
+        staff.stream()
+                .filter(e -> e.getWorkStart().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear() == 2017)
                 .max(Comparator.comparing(Employee::getSalary))
                 .ifPresent(System.out::println);
     }

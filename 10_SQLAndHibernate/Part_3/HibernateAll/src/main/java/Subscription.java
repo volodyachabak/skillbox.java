@@ -7,11 +7,11 @@ import java.util.Date;
 public class Subscription implements Serializable{
 
     @Id
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Student student;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Course course;
 
     @Column(name = "subscription_date")

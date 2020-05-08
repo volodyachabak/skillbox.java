@@ -31,10 +31,8 @@ public class Runner {
             queryCourse.setParameter("name", p.getCourseName());
             Course course = (Course) queryCourse.getSingleResult();
 
-            linkedPurchase.setStudentId(student.getId());
-            linkedPurchase.setCourseId(course.getId());
-
-            System.out.println(linkedPurchase);
+            linkedPurchase.setStudent(student);
+            linkedPurchase.setCourse(course);
 
             session.save(linkedPurchase);
         });

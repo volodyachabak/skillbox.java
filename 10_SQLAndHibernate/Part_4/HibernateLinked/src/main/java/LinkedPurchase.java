@@ -1,7 +1,5 @@
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -9,34 +7,36 @@ import java.io.Serializable;
 public class LinkedPurchase implements Serializable {
 
     @Id
-    @Column(name = "student_id", nullable = false, unique = true)
-    private Integer studentId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id", nullable = false, unique = true)
+    private Student student;
 
     @Id
-    @Column(name = "course_id", nullable = false, unique = true)
-    private Integer courseId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", nullable = false, unique = true)
+    private Course course;
 
-    public Integer getStudentId() {
-        return studentId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public Integer getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     @Override
     public String toString() {
         return "LinkedPurchase{" +
-                "student_id=" + studentId +
-                ", course_id=" + courseId +
+                "student=" + student +
+                ", course=" + course +
                 '}';
     }
 }

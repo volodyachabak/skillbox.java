@@ -27,7 +27,6 @@ public class ImageResizer implements Runnable {
                     continue;
                 }
 
-
                 int newHeight = (int) Math.round(
                         image.getHeight() / (image.getWidth() / (double) newWidth)
                 );
@@ -45,6 +44,7 @@ public class ImageResizer implements Runnable {
                         newImage.setRGB(x, y, rgb);
                     }
                 }
+
 
                 File newFile = new File(dstFolder + "/" + file.getName());
                 ImageIO.write(newImage, "jpg", newFile);
